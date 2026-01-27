@@ -1,0 +1,785 @@
+HTML
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> WebQuest: Habilidades Comunicacionales en Ingeniería 💡</title>
+    <link rel="icon" href="image_0.png" type="image/png">
+    <style>
+        :root {
+            --color-primary: #007bff; /* Azul vibrante */
+            --color-secondary: #28a745; /* Verde para éxito */
+            --color-background: #f8f9fa; /* Gris claro */
+            --color-text: #343a40; /* Gris oscuro */
+            --color-card-bg: #ffffff; /* Blanco para tarjetas */
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --box-shadow-light: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --box-shadow-medium: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        header {
+            position: relative; /* Necesario para posicionar elementos absolutos dentro */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://picsum.photos/1200/300?random=1') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 40px 20px 30px 20px; /* Ajustado padding inferior para el autor */
+            text-align: center;
+            box-shadow: var(--box-shadow-medium);
+        }
+
+        /* Estilos modificados para el banner */
+        .banner-icon {
+            position: absolute;
+            top: 15px;
+            left: 20px; /* Cambiado de right a left para ubicar a la izquierda */
+            height: 90px; /* Tamaño ajustado del icono */
+            width: auto;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil para destacar */
+            padding: 5px;
+            border-radius: 8px;
+        }
+
+        .banner-author {
+            margin-top: 30px;
+            font-size: 0.85em; /* Letras más pequeñas */
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+            padding-right: 80px; /* Evitar solapamiento con el icono en pantallas pequeñas */
+        }
+
+        header p.subtitle {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* --- Pestañas de Navegación (Tabs) --- */
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            border-bottom: 2px solid #dee2e6;
+            margin-bottom: 20px;
+            white-space: nowrap;
+        }
+
+        .tab-button {
+            background-color: transparent;
+            border: none;
+            padding: 15px 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--color-text);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-button:hover {
+            color: var(--color-primary);
+        }
+
+        .tab-button.active {
+            color: var(--color-primary);
+            border-bottom: 3px solid var(--color-primary);
+            margin-bottom: -2px; /* Para que la línea del tab activo cubra el borde inferior */
+        }
+
+        .tab-content {
+            display: none;
+            background-color: var(--color-card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: var(--box-shadow-light);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* --- Estilos Generales de Contenido --- */
+        h2 {
+            color: var(--color-primary);
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        h3 {
+            color: var(--color-secondary);
+            font-size: 1.4em;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: var(--color-card-bg);
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Estilo para el contenedor del video insertado */
+        .video-wrapper {
+            background-color: #f0f2f5;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            border: 1px solid #dce4ec;
+        }
+
+        .video-wrapper h3 { margin-top: 0; color: var(--color-primary); }
+        .video-wrapper p { margin-bottom: 15px; color: var(--color-text); }
+
+        .role-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .role-list li {
+            background-color: #e9f7ef;
+            border-left: 5px solid var(--color-secondary);
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .role-list strong {
+            color: var(--color-primary);
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        /* --- Estilos para la Rúbrica de Evaluación --- */
+        .rubrica table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .rubrica th, .rubrica td {
+            border: 1px solid #ced4da;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .rubrica th {
+            background-color: var(--color-primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .rubrica td:first-child {
+            text-align: left;
+            font-weight: bold;
+            background-color: #f1f1f1;
+            color: var(--color-primary);
+            width: 150px;
+        }
+
+        .rubrica tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* --- Estilos para el Quiz Interactivo (Movido a Evaluación) --- */
+        .quiz-section-wrapper {
+            margin-top: 50px; /* Separación de la rúbrica */
+            border-top: 3px dashed #dee2e6;
+            padding-top: 30px;
+        }
+
+        .quiz-question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fafafa;
+        }
+
+        .quiz-question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+        }
+        
+        .quiz-feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .quiz-feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .quiz-feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .quiz-button {
+            background-color: var(--color-secondary);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quiz-button:hover {
+            background-color: #1e7e34;
+        }
+
+        /* Estilos específicos para simulación de preguntas complejas */
+        .sim-container {
+             margin-top: 10px; border: 1px solid #e9ecef; padding: 15px; border-radius: 5px; background: white;
+        }
+        .sim-item-title {
+            font-weight: bold; color: var(--color-secondary);
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+                padding-right: 0;
+            }
+            .banner-icon {
+                height: 60px;
+                top: 10px;
+                right: 10px;
+            }
+
+            .tabs {
+                justify-content: start;
+            }
+
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .rubrica th, .rubrica td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+
+            .rubrica td:first-child {
+                width: 100px;
+            }
+            .video-wrapper video, .video-wrapper iframe {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="Icono MITE1.png" alt="Logo Decanato" class="banner-icon">
+        
+        <h1>WebQuest: Habilidades Comunicacionales en Ingeniería 💡</h1>
+        <p class="subtitle">Neuroeducación, TIC y Liderazgo para el Ingeniero del Siglo XXI</p>
+        
+        <p class="banner-author">Autor: Ing. Edgar Guerra</p>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-button active" onclick="openTab(event, 'Introduccion')">1. Introducción</button>
+            <button class="tab-button" onclick="openTab(event, 'Objetivos')">2. Objetivos</button>
+            <button class="tab-button" onclick="openTab(event, 'Tareas')">3. Tareas</button>
+            <button class="tab-button" onclick="openTab(event, 'Proceso')">4. Proceso</button>
+            <button class="tab-button" onclick="openTab(event, 'Recursos')">5. Recursos</button>
+            <button class="tab-button" onclick="openTab(event, 'Evaluacion')">6. Evaluación</button>
+            <button class="tab-button" onclick="openTab(event, 'Conclusiones')">7. Conclusiones</button>
+            </div>
+
+        <div id="Introduccion" class="tab-content active">
+            <h2>🌍 Introducción: El Desafío del Ingeniero Comunicador</h2>
+            <p>La ingeniería moderna no se trata solo de cálculos y estructuras; es fundamentalmente un **acto de comunicación**. Los proyectos fallan no por mala ingeniería, sino por una pobre transmisión de ideas, la incapacidad de negociar, o la falta de claridad al interactuar con equipos multidisciplinarios, clientes y la sociedad.</p>
+            
+            <div class="video-wrapper">
+                <h3>VIDEO: Comunicación Efectiva para Ingenieros</h3>
+                <p><strong>Habilidades interpersonales para el éxito profesional</strong><br>
+                <span style="font-size: 0.9em;">Presentado por: Andrea Peris Yegros</span></p>
+                
+                <video width="80%" height="auto" controls style="border-radius: 8px; box-shadow: var(--box-shadow-light);">
+                    <source src="Comunicación Efectiva para Ingenieros.Mp4" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                </video>
+            </div>
+
+            <p>Esta WebQuest te invita a explorar, desde la **Neuroeducación**, cómo nuestro cerebro procesa la información y cómo las **Habilidades Comunicacionales** (verbales, escritas y digitales) se convierten en el **engranaje crítico** que traduce el conocimiento técnico complejo en soluciones que impactan. Utilizarás las **TIC** como tus principales herramientas de investigación y presentación.</p>
+            <p>**Tu misión:** Desarrollar una estrategia comunicacional robusta para un proyecto de ingeniería complejo, demostrando que la empatía y la claridad son tan cruciales como la precisión técnica. </p>
+            <hr>
+        </div>
+
+        <div id="Objetivos" class="tab-content">
+            <h2>🎯 Objetivos de Aprendizaje</h2>
+            
+            <div class="card" style="background-color: #e7f3ff; border-left-color: var(--color-primary);">
+                <h3 style="margin-top: 0; color: var(--color-primary);">Objetivo General</h3>
+                <p style="margin-bottom: 0;">Desarrollar estrategias comunicacionales integrales en el contexto de la ingeniería, aplicando principios de neuroeducación y herramientas TIC avanzadas, para transformar información técnica compleja en mensajes claros, persuasivos y adaptados a diversas audiencias profesionales, fortaleciendo el liderazgo del ingeniero.</p>
+            </div>
+
+            <p>Al completar esta WebQuest, el estudiante será capaz de:</p>
+            <ol>
+                <li>**Analizar críticamente** la relación entre la activación de redes neuronales (Neurociencia) y la efectividad de las diferentes modalidades comunicacionales (oral, escrita, visual).</li>
+                <li>**Diseñar y estructurar** reportes técnicos y presentaciones profesionales utilizando herramientas de IA generativa (como apoyo a la síntesis), adaptando el lenguaje al público objetivo (clientes, técnicos, gerentes).</li>
+                <li>**Aplicar modelos de comunicación efectiva** en la resolución de un caso práctico de ingeniería, identificando y mitigando las barreras comunicacionales comunes en entornos de proyecto.</li>
+                <li>**Evaluar la influencia de las TIC** (plataformas colaborativas, IA, Web 2.0) como amplificadores o distorsionadores del mensaje en el ciclo de vida de un proyecto de ingeniería.</li>
+            </ol>
+            <hr>
+        </div>
+
+        <div id="Tareas" class="tab-content">
+            <h2>🛠️ Tareas y Producto Final</h2>
+            
+            <h3>Producto Final: Estrategia Comunicacional Integral (Formato Digital)</h3>
+            <p>Los equipos deben entregar un **documento digital interactivo** (por ejemplo, un sitio web simple, una presentación en Genially/Prezi o un PDF interactivo) que contenga:</p>
+            <ol>
+                <li>**Diagnóstico Neurolingüístico:** Breve análisis de cómo el cerebro percibe y procesa la información técnica vs. emocional, justificando el diseño comunicacional elegido.</li>
+                <li>**Reporte Técnico Adaptado:** Un resumen ejecutivo y una sección técnica de un proyecto de ingeniería real o simulado, mostrando la adaptación del lenguaje para dos públicos: un equipo técnico y un comité financiero no técnico.</li>
+                <li>**Infografía / Video Explicativo (IA Generativa):** Creación de un activo visual (infografía o guion para video) utilizando herramientas de IA (ej. Canva con Magic Design, o ChatGPT para guion) que simplifique un concepto técnico complejo del proyecto.</li>
+            </ol>
+
+            <h3>Roles Colaborativos</h3>
+            <p>El equipo se dividirá en cuatro roles esenciales, fomentando la **colaboración** como potenciador de la memoria y el aprendizaje (Neuroeducación):</p>
+            <ul class="role-list">
+                <li><strong>Investigador (Lóbulos Frontales):</strong> Encargado de la búsqueda y verificación de fuentes (Recursos), enfocado en la Neurociencia de la comunicación. Aporta la base teórica.</li>
+                <li><strong>Diseñador Visual (Lóbulos Occipitales):</strong> Responsable del atractivo visual, la coherencia de la paleta de colores y la usabilidad (Neuroestética y TIC). Crea la infografía/video y el diseño del documento.</li>
+                <li><strong>Redactor Crítico (Lóbulos Temporales):</strong> Especialista en adaptar el lenguaje. Edita y pule los textos, asegurando la precisión técnica y la claridad para el público no técnico.</li>
+                <li><strong>Especialista en el Tema (Lóbulos Parietales):</strong> Se enfoca en la precisión del contenido de ingeniería. Garantiza que el caso práctico sea técnicamente sólido y relevante.</li>
+            </ul>
+
+            <h3>Criterios de Éxito</h3>
+            <p>El proyecto será considerado exitoso si:</p>
+            <ul>
+                <li>El producto final demuestra una **adaptación fluida del lenguaje** técnico a dos audiencias distintas, según el rol del Redactor Crítico.</li>
+                <li>El uso de **herramientas digitales (TIC/IA)** simplifica un concepto complejo de manera efectiva y visualmente atractiva.</li>
+                <li>El Diagnóstico Neurolingüístico **conecta explícitamente** el diseño comunicacional con principios básicos de la Neuroeducación.</li>
+            </ul>
+            <hr>
+        </div>
+
+        <div id="Proceso" class="tab-content">
+            <h2>⚙️ Proceso: Secuencia Mediada por TIC</h2>
+            <p>El aprendizaje es un proceso secuencial y activo. Sigan estos pasos detallados:</p>
+            
+            <h3>Fase I: Activación Neuronal y Conceptualización (Semana 1)</h3>
+            <div class="card">
+                <p><strong>Paso 1.1: Exploración Inicial (TIC: Búsqueda)</strong></p>
+                <ul>
+                    <li>El **Investigador** explora los recursos dados, enfocándose en la neurociencia del lenguaje y la persuasión.</li>
+                    <li>**Actividad Crítica:** Debate en equipo: ¿Por qué un ingeniero necesita la **empatía** para comunicar un riesgo técnico? (Conexión cerebro social).</li>
+                </ul>
+                <p><strong>Paso 1.2: Definición de Caso (Colaboración Web 2.0)</strong></p>
+                <ul>
+                    <li>El equipo elige un proyecto de ingeniería (real o ficticio) que presente un desafío comunicacional (ej. el costo vs. la seguridad de un diseño).</li>
+                    <li>Usar una herramienta colaborativa (ej. Google Docs o Miro) para definir el **problema central** y los **dos públicos objetivo**.</li>
+                </ul>
+            </div>
+
+            <h3>Fase II: Desarrollo y Producción Mediada (Semanas 2-3)</h3>
+            <div class="card">
+                <p><strong>Paso 2.1: Desarrollo del Contenido (IA Generativa)</strong></p>
+                <ul>
+                    <li>El **Especialista en el Tema** redacta el contenido técnico base.</li>
+                    <li>El **Redactor Crítico** utiliza una herramienta de IA (ej. ChatGPT) para solicitar una "síntesis del contenido anterior con un tono simplificado y persuasivo para un gerente no técnico", y luego lo **refina críticamente** (no copiar y pegar, sino usarlo como borrador cerebral).</li>
+                </ul>
+                <p><strong>Paso 2.2: Diseño Visual (TIC y Neuroestética)</strong></p>
+                <ul>
+                    <li>El **Diseñador Visual** crea la infografía o el guion de video, aplicando principios de Neuroestética (uso de colores para enfocar la atención, jerarquía visual).</li>
+                    <li>Utilizar herramientas como **Canva, Genially o una herramienta de IA generativa de imágenes**.</li>
+                </ul>
+            </div>
+
+            <h3>Fase III: Consolidación y Conexión Neurológica (Semana 4)</h3>
+            <div class="card">
+                <p><strong>Paso 3.1: Diagnóstico y Conexión Neuroeducativa</strong></p>
+                <ul>
+                    <li>El **Investigador** lidera la redacción del Diagnóstico Neurolingüístico, explicando cómo los elementos del diseño final (ej. las imágenes, la síntesis, la estructura) optimizan la carga cognitiva y facilitan la memorización del público.</li>
+                </ul>
+                <p><strong>Paso 3.2: Ensamblaje y Retroalimentación Final</strong></p>
+                <ul>
+                    <li>El equipo ensambla el producto final. Se realiza una **revisión cruzada** (cada rol revisa la parte de otro rol) para garantizar la coherencia antes de la entrega final.</li>
+                </ul>
+            </div>
+            <hr>
+        </div>
+
+        <div id="Recursos" class="tab-content">
+            <h2>📚 Recursos de Apoyo Verificados</h2>
+            <p>La información es el combustible del cerebro. Se requiere la consulta de estas fuentes, priorizando la perspectiva Neuroeducativa:</p>
+            <ul>
+                <li><strong>Video:</strong>
+                    <ul>
+                        <li>**Título:** "Neurociencia y Educación: Un Enfoque Práctico"</li>
+			<li>**Autor/Año:** Fermín Sánchez Carracedo (2019).</li>
+			<li>**Enlace:** <a href="https://www.youtube.com/watch?v=N6RgdPlExtQ" target="_blank">Enlace de YouTube (Simulación) </a></li>
+			<li>**Relevancia:** Explica cómo los ingenieros pueden estructurar argumentos apelando al sistema límbico (emoción) y neocórtex (lógica).</li>
+
+                    </ul>
+		    <ul>
+			<li>**Título:** "Neurociencia aplicada a las Comunicaciones:"</li>
+			<li>**Autor/Año:** Sergio Bravo y Luis Bolaños (2021).</li>
+			<li>**Enlace:** <a href="https://www.youtube.com/watch?v=zSRJgtMvG1I" target="_blank">Enlace de YouTube (Simulación)</a></li>
+			<li>**Relevancia:** Explica el comportamiento emocional del cerebro frente a estímulos externos</li>
+		    </ul>
+                </li>
+                <li><strong>Artículo Académico:</strong>
+                    <ul>
+                        <li>**Título:** "Impacto de la neuroeducación a través de las TIC en el desarrollo de la competencia lectora en estudiantes de básica superior"</li>
+                        <li>**Autor/Año:** Viviana Del Pilar Guamán Guallpa (2025).</li>
+                        <li>**Enlace:** <a href="https://ve.scielo.org/scielo.php?script=sci_arttext&pid=S2739-00632025000102066" target="_blank">Enlace al Articulículo</a></li>
+                        <li>**Relevancia:** Este artículo explora la integración de la neuroeducación y las tecnologías de la información y la comunicación (TICs) en la enseñanza ...</li>
+                    </ul>
+                </li>
+                <li><strong>Artículo de Revista Especializada:</strong>
+                    <ul>
+                        <li>**Título:** "La Importancia de la Comunicación Efectiva en la Carrera de un Ingeniero"</li>
+                        <li>**Autor/Año:** Utel Universidad . (2024).</li>
+                        <li>**Enlace:** <a href="https://ingenierosconectados.com/comunicacion-efectiva-ingenieros/" target="_blank">Enlace al Artículo</a></li>
+                        <li>**Relevancia:** Permite traducir conceptos técnicos complejos a términos comprensibles para colegas y clientes.</li>
+                    </ul>
+                </li>
+                <li><strong>Informe Oficial:</strong>
+                    <ul>
+                        <li>**Título:** "Las competencias blandas en la formación del ingeniero."</li>
+                        <li>**Autor/Año:** Olga Camacaro Universidad Yacambú, Venezuela. (2024).</li>
+                        <li>**Enlace:** <a href="https://revista.uny.edu.ve/ojs/index.php/ingenium/article/view/538" target="_blank">Enlace al informe</a></li>
+                        <li>**Relevancia:** Contextualiza la necesidad de estas habilidades en el mercado laboral regional.</li>
+                    </ul>
+                </li>
+            </ul>
+            <hr>
+        </div>
+
+        <div id="Evaluacion" class="tab-content rubrica">
+            <h2>💯 Evaluación: Rúbrica Analítica</h2>
+            <p>La evaluación se centrará en el producto final (Estrategia Comunicacional Integral) y la integración del conocimiento, utilizando esta rúbrica para fomentar la autoevaluación y la metacognición.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Excelente (4 puntos)</th>
+                        <th>Bueno (3 puntos)</th>
+                        <th>Suficiente (2 puntos)</th>
+                        <th>Insuficiente (1 punto)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**1. Contextualización del Problema**</td>
+                        <td>Define el caso con **máxima claridad** e integra el diagnóstico neurolingüístico de forma **profunda** y explícita con el diseño.</td>
+                        <td>Define el caso claramente y relaciona el diagnóstico neurolingüístico, aunque la conexión con el diseño podría ser más sólida.</td>
+                        <td>El caso es ambiguo y el diagnóstico neurolingüístico es superficial o falta la conexión directa con la estrategia comunicacional.</td>
+                        <td>No define el caso o el diagnóstico neurolingüístico es inexistente o irrelevante.</td>
+                    </tr>
+                    <tr>
+                        <td>**2. Precisión y Adaptación**</td>
+                        <td>El reporte técnico es **impecable** y la adaptación al público no técnico es **fluida y 100% efectiva**, sin perder la rigurosidad.</td>
+                        <td>El reporte es preciso, pero la adaptación al público no técnico presenta ligeros fallos de claridad o el lenguaje es inconsistente en algunas secciones.</td>
+                        <td>El reporte tiene errores técnicos o la adaptación es mínima, utilizando aún demasiado tecnicismo en la versión para no expertos.</td>
+                        <td>El contenido técnico es erróneo o la adaptación es inexistente.</td>
+                    </tr>
+                    <tr>
+                        <td>**3. Colaboración y Roles (Evidencia)**</td>
+                        <td>La evidencia digital (historial de colaboración) muestra una **distribución equitativa y proactiva** de los roles, potenciando el resultado final.</td>
+                        <td>La distribución de roles es visible y la colaboración fue constante, aunque con algunos picos de trabajo individualizado.</td>
+                        <td>La división de tareas es superficial y el producto final no refleja una contribución significativa de todos los roles.</td>
+                        <td>No hay evidencia de colaboración y los roles no fueron asumidos o aplicados.</td>
+                    </tr>
+                    <tr>
+                        <td>**4. Diseño Visual y Uso de TIC/IA**</td>
+                        <td>Diseño **atractivo, *responsive*** y el activo visual (infografía/video) utiliza la IA/TIC de manera **creativa** y pedagógicamente superior (Neuroestética).</td>
+                        <td>Diseño funcional, el activo visual es correcto y la herramienta IA/TIC fue usada adecuadamente, pero sin gran creatividad.</td>
+                        <td>El diseño es básico y el activo visual es genérico, con un uso mínimo o ineficiente de las herramientas TIC/IA.</td>
+                        <td>El producto carece de diseño o no utiliza las herramientas digitales requeridas.</td>
+                    </tr>
+                    <tr>
+                        <td>**5. Citación y Ética APA**</td>
+                        <td>Todas las fuentes (recursos dados y otros) están citadas correctamente en formato APA 7 y el uso de IA es **transparentemente referenciado**.</td>
+                        <td>La mayoría de las fuentes están citadas en APA, con errores menores o falta la citación de alguna herramienta de IA.</td>
+                        <td>La citación es inconsistente, incompleta, o se utiliza un formato incorrecto (no APA).</td>
+                        <td>No hay citación de fuentes ni reconocimiento del uso de IA.</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="quiz-section-wrapper">
+                <h2>🕹️ Quiz Interactivo</h2>
+                <p>Evalúa tus conocimientos. Recibirás retroalimentación instantánea sobre tus respuestas.</p>
+                
+                <div id="quiz-container"></div>
+                
+                <button class="quiz-button" onclick="checkQuiz()">Verificar Respuestas</button>
+                <div id="quiz-score" style="margin-top: 20px; font-weight: bold; font-size: 1.3em; color: var(--color-primary); text-align: center;"></div>
+                
+                <hr>
+
+            </div>
+        </div>
+
+        <div id="Conclusiones" class="tab-content">
+            <h2>🧠 Conclusiones: Refuerzo Neurológico</h2>
+            <p>La fase final de la WebQuest busca la **consolidación de la memoria a largo plazo** mediante la reflexión metacognitiva (Neuroeducación).</p>
+            
+            <h3>Reflexión Colaborativa</h3>
+            <p>En equipo, discutan y documenten (máximo 300 palabras) la conexión entre lo aprendido y las bases neurocientíficas:</p>
+            <blockquote class="card">
+                <p><strong>Preguntas Guía:</strong></p>
+                <ul>
+                    <li>¿Cómo el proceso de adaptación del lenguaje (pasar de técnico a simple) refleja la función de la **corteza prefrontal** en la regulación y síntesis de la información?</li>
+                    <li>¿De qué manera el uso de elementos visuales (Diseñador) y la colaboración (Neuroeducación Social) facilitaron la **retención y comprensión** de la información técnica compleja, en lugar de una simple lectura? (Pista: **Amígdala** y emoción, **Hipocampo** y memoria).</li>
+                    <li>Identifiquen una herramienta **TIC o IA** utilizada y expliquen cómo redujo la **carga cognitiva** del equipo (el esfuerzo mental necesario), permitiéndoles enfocarse en el pensamiento crítico y no en la tarea repetitiva.</li>
+                </ul>
+            </blockquote>
+            <p>La **ingeniería es aplicada neurociencia social**: Diseñamos soluciones para personas y debemos comunicar de una manera que sus cerebros puedan comprender y aceptar. **Tu capacidad de influencia** es tu mayor herramienta de ingeniería.</p>
+            <hr>
+        </div>
+
+        </div> 
+    
+    <script>
+        // --- 1. Sistema de Pestañas (Tabs) ---
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.className += " active";
+        }
+        
+        // Asegurar que la introducción se muestre al cargar e inicializar el quiz
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Mostrar la primera pestaña por defecto
+            document.getElementById('Introduccion').style.display = 'block';
+            document.querySelector('.tab-button').classList.add('active');
+            
+            // Inicializar Quiz (aunque ahora está en la pestaña Evaluación)
+            generateQuiz();
+        });
+
+
+        // --- 2. Datos y Lógica del Quiz Interactivo ---
+        // (El código JS del quiz se mantiene igual, ya que funciona independientemente de su ubicación HTML)
+        const quizData = [
+            // 5 Selección Simple (radio)
+            { type: 'radio', question: '¿Cuál es la principal función de la Corteza Prefrontal en la comunicación efectiva?', options: ['Controlar movimientos motrices.', 'Regular y sintetizar información compleja.', 'Almacenar recuerdos a largo plazo.', 'Procesar el sentido del olfato.'], answer: 'Regular y sintetizar información compleja.', feedback: 'La Corteza Prefrontal es clave en las funciones ejecutivas, como la síntesis, la toma de decisiones y la adaptación del lenguaje.' },
+            { type: 'radio', question: '¿Qué componente de la Neuroeducación se potencia con la asignación de roles colaborativos?', options: ['Aprendizaje solitario.', 'Neuroplasticidad pasiva.', 'Memoria procedimental.', 'Aprendizaje social y la colaboración.'], answer: 'Aprendizaje social y la colaboración.', feedback: 'La colaboración activa las redes sociales y emocionales del cerebro, potenciando el aprendizaje y la memoria.' },
+            { type: 'radio', question: 'Según la Neuroestética, ¿qué color es universalmente asociado a la confianza y la calma, ideal para un informe técnico?', options: ['Rojo vibrante.', 'Amarillo intenso.', 'Azul.', 'Verde neón.'], answer: 'Azul.', feedback: 'El azul es comúnmente asociado con la fiabilidad, la lógica y la calma, reduciendo la carga cognitiva.' },
+            { type: 'radio', question: '¿Cuál de estas es una herramienta web 2.0 que facilita la creación de infografías (Diseñador Visual)?', options: ['Microsoft Paint.', 'MS-DOS.', 'Canva o Genially.', 'Calculadora de Windows.'], answer: 'Canva o Genially.', feedback: 'Canva y Genially son ejemplos de herramientas Web 2.0 que permiten la creación visual interactiva.' },
+            { type: 'radio', question: '¿Qué parte del cerebro está más implicada en el procesamiento emocional que impacta la persuasión?', options: ['El cerebelo.', 'La amígdala.', 'El bulbo raquídeo.', 'El lóbulo parietal.'], answer: 'La amígdala.', feedback: 'La amígdala juega un rol crucial en el procesamiento de las emociones, esencial para la persuasión y la comunicación de riesgos.' },
+            
+            // 5 Selección Múltiple (checkbox)
+            { type: 'checkbox', question: 'Selecciona las **barreras comunicacionales** que un ingeniero debe mitigar (Selecciona 3):', options: ['Filtraje emocional del mensaje.', 'Uso excesivo de jerga técnica (tecnicismos).', 'Claridad del objetivo.', 'Retroalimentación constante.', 'Asumir que el público entiende todo.'], answer: ['Filtraje emocional del mensaje.', 'Uso excesivo de jerga técnica (tecnicismos).', 'Asumir que el público entiende todo.'], feedback: 'Las barreras incluyen tecnicismos, asunciones incorrectas sobre el conocimiento del público y el filtrado o distorsión del mensaje por sesgos emocionales.' },
+            { type: 'checkbox', question: '¿Qué habilidades mejoran el aprendizaje y la memoria a través de la Neuroeducación (Selecciona 2)?', options: ['Repetición pasiva de conceptos.', 'Pensamiento crítico.', 'Reflexión metacognitiva.', 'Memorización de fórmulas sin contexto.', 'Aislamiento social.'], answer: ['Pensamiento crítico.', 'Reflexión metacognitiva.'], feedback: 'El pensamiento crítico y la metacognición activan redes de orden superior, consolidando el aprendizaje en el hipocampo y la corteza prefrontal.' },
+            { type: 'checkbox', question: '¿Qué formatos digitales son un producto final válido para la WebQuest (Selecciona 3)?', options: ['Tesis doctoral impresa.', 'Sitio web simple.', 'PDF interactivo.', 'Presentación Genially/Prezi.', 'Un fax.'], answer: ['Sitio web simple.', 'PDF interactivo.', 'Presentación Genially/Prezi.'], feedback: 'Se requieren formatos digitales interactivos o de fácil acceso online, como sitios web, PDFs interactivos o presentaciones Web 2.0.' },
+            { type: 'checkbox', question: '¿Qué roles están orientados al contenido y la precisión (Selecciona 2)?', options: ['Diseñador Visual.', 'Investigador.', 'Especialista en el Tema.', 'Redactor Crítico.'], answer: ['Investigador.', 'Especialista en el Tema.'], feedback: 'El Investigador se centra en la base teórica y el Especialista en el Tema en la precisión técnica del caso de ingeniería.' },
+            { type: 'checkbox', question: '¿Qué tipo de herramientas TIC/IA ayudan a simplificar la información compleja (Selecciona 2)?', options: ['IA Generativa para guiones.', 'Plataformas de gestión de correo electrónico.', 'Herramientas de visualización de datos.', 'Un procesador de texto sin formato.'], answer: ['IA Generativa para guiones.', 'Herramientas de visualización de datos.'], feedback: 'La IA puede ayudar a sintetizar el lenguaje y las herramientas de visualización (como las de datos) simplifican la complejidad visualmente.' },
+
+            // 4 Verdadero/Falso
+            { type: 'truefalse', question: 'La **Neuroeducación** solo se aplica a la educación básica, no a la universitaria.', answer: false, feedback: 'Falso. Los principios de la Neuroeducación (manejo de la emoción, carga cognitiva) son aplicables en todos los niveles educativos, incluido el superior.' },
+            { type: 'truefalse', question: 'El uso de **jerga técnica** es una estrategia comunicacional efectiva para todos los públicos.', answer: false, feedback: 'Falso. La jerga técnica es una barrera para los públicos no especializados (gerentes, clientes) y debe mitigarse.' },
+            { type: 'truefalse', question: 'El proceso de usar IA para **sintetizar** un texto y luego revisarlo críticamente reduce la carga cognitiva.', answer: true, feedback: 'Verdadero. La IA maneja la tarea repetitiva de la redacción del borrador, liberando la capacidad mental para el pensamiento crítico y la adaptación.' },
+            { type: 'truefalse', question: 'El formato APA solo es obligatorio en la sección de recursos de esta WebQuest.', answer: false, feedback: 'Falso. Se evalúa el uso de APA en todas las secciones donde se utilicen fuentes, incluyendo la citación transparente del uso de la IA (Criterio 5).' },
+
+            // 4 Simulaciones (Simplificadas visualmente)
+            { type: 'sim_dragdrop', question: 'Asigna el concepto a su área de enfoque principal (Selecciona la mejor correspondencia):', answers: [
+                { term: 'Reducción de Carga Cognitiva', options: ['Diseño Visual', 'Adaptación del Lenguaje', 'Tecnicismo', 'Neuroplasticidad'], answer: 'Adaptación del Lenguaje', feedback: 'Adaptar un lenguaje complejo a uno simple reduce el esfuerzo mental (carga cognitiva).' },
+                { term: 'Consolidación de la Memoria', options: ['Distracción', 'Aprendizaje Lúdico/Emoción', 'Aburrimiento', 'Silencio total'], answer: 'Aprendizaje Lúdico/Emoción', feedback: 'La emoción y el aprendizaje activo facilitan la consolidación de la memoria en el hipocampo.' },
+                { term: 'Lóbulos Occipitales', options: ['Oído', 'Tacto', 'Visión', 'Olfato'], answer: 'Visión', feedback: 'Los lóbulos occipitales son el centro primario de procesamiento de la información visual (Diseñador Visual).' },
+                { term: 'Transparencia de IA', options: ['Ética APA', 'Colaboración', 'Recursos Web', 'Introducción'], answer: 'Ética APA', feedback: 'La referencia transparente de las herramientas de IA está cubierta por el criterio de Ética y Citación APA.' },
+            ]},
+            
+            { type: 'sim_relational', question: 'Relaciona el Rol con su Enfoque Neurológico Principal:', answers: [
+                { term: 'Investigador', options: ['Corteza Prefrontal (Síntesis)', 'Hipocampo (Memoria/Bases)', 'Lóbulos Occipitales (Visión)', 'Amígdala (Emoción)'], answer: 'Hipocampo (Memoria/Bases)', feedback: 'El Investigador se enfoca en la recopilación de datos y bases teóricas (memoria).' },
+                { term: 'Diseñador Visual', options: ['Corteza Prefrontal (Síntesis)', 'Hipocampo (Memoria)', 'Lóbulos Occipitales (Visión)', 'Amígdala (Emoción)'], answer: 'Lóbulos Occipitales (Visión)', feedback: 'El Diseñador apela al sentido de la visión y la Neuroestética.' },
+                { term: 'Redactor Crítico', options: ['Corteza Prefrontal (Síntesis/Adaptación)', 'Hipocampo (Memoria)', 'Lóbulos Occipitales (Visión)', 'Amígdala (Emoción)'], answer: 'Corteza Prefrontal (Síntesis/Adaptación)', feedback: 'El Redactor aplica funciones ejecutivas de síntesis y adaptación del lenguaje.' },
+                { term: 'Especialista en el Tema', options: ['Corteza Prefrontal (Precisión Técnica)', 'Hipocampo (Memoria)', 'Lóbulos Occipitales (Visión)', 'Amígdala (Emoción)'], answer: 'Corteza Prefrontal (Precisión Técnica)', feedback: 'El Especialista requiere de la función ejecutiva de precisión y validación de datos técnicos.' },
+            ]},
+        ];
+
+        function generateQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+            
+            quizData.forEach((q, index) => {
+                const qElement = document.createElement('div');
+                qElement.className = 'quiz-question';
+                qElement.innerHTML = `<p>Pregunta ${index + 1} (${getQuizTypeLabel(q.type)}): ${q.question}</p>`;
+                
+                if (q.type === 'radio' || q.type === 'truefalse') {
+                    q.options.forEach((option, i) => {
+                        qElement.innerHTML += `
+                            <label style="display: block; margin-bottom: 8px; cursor: pointer;">
+                                <input type="radio" name="q${index}" value="${option}" style="margin-right: 10px;">
+                                ${option}
+                            </label>
+                        `;
+                    });
+                } else if (q.type === 'checkbox') {
+                    q.options.forEach((option, i) => {
+                        qElement.innerHTML += `
+                            <label style="display: block; margin-bottom: 8px; cursor: pointer;">
+                                <input type="checkbox" name="q${index}" value="${option}" style="margin-right: 10px;">
+                                ${option}
+                            </label>
+                        `;
+                    });
+                } else if (q.type === 'sim_dragdrop' || q.type === 'sim_relational') {
+                    q.answers.forEach((item, itemIndex) => {
+                        qElement.innerHTML += `<div class="sim-container"><span class="sim-item-title">${item.term}:</span>`;
+                        item.options.forEach((opt, optIndex) => {
+                            qElement.innerHTML += `
+                                <label style="display: block; margin-left: 15px; margin-top: 5px; cursor: pointer;">
+                                    <input type="radio" name="q${index}_item${itemIndex}" value="${opt}" style="margin-right: 8px;">
+                                    ${opt}
+                                </label>
+                            `;
+                        });
+                        qElement.innerHTML += `</div>`;
+                    });
+                }
+                
+                qElement.innerHTML += `<div id="feedback-${index}" class="quiz-feedback"></div>`;
+                container.appendChild(qElement);
+            });
+        }
+
+        function getQuizTypeLabel(type) {
+            switch(type) {
+                case 'radio': return 'Selección Simple';
+                case 'checkbox': return 'Selección Múltiple';
+                case 'truefalse': return 'Verdadero/Falso';
+                case 'sim_dragdrop': return 'Relación de Conceptos';
+                case 'sim_relational': return 'Relación de Roles';
+                default: return 'Pregunta';
+            }
+        }
+
+        function checkQuiz() {
+            let score = 0;
+            const totalQuestions = quizData.length;
+            const scoreElement = document.getElementById('quiz-score');
+            let allAnswered = true;
+
+            quizData.forEach((q, index) => {
+                const feedbackElement = document.getElementById(`feedback-${index}`);
+                let isCorrect = false;
+                let answered = false;
+                
+                if (q.type === 'radio' || q.type === 'truefalse') {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected) {
+                        isCorrect = selected.value === q.answer;
+                        answered = true;
+                    }
+                } else if (q.type === 'checkbox') {
+                    const selectedOptions = Array.from(document.querySelectorAll(`input[name="q${index}"]:checked`)).map(cb => cb.value);
+                    if (selectedOptions.length > 0) answered = true;
+                    const correctAnswers = q.answer;
+                    isCorrect = selectedOptions.length === correctAnswers.length && 
+                                correctAnswers.every(ans => selectedOptions.includes(ans));
+                } else if (q.type === 'sim_dragdrop' || q.type === 'sim_relational') {
+                    let correctItems = 0;
+                    let itemsAnswered = 0;
+                    q.answers.forEach((item, itemIndex) => {
+                        const selected = document.querySelector(`input[name="q${index}_item${itemIndex}"]:checked`);
+                        if (selected) {
+                            itemsAnswered++;
+                            if (selected.value === item.answer) correctItems++;
+                        }
+                    });
+                    if (itemsAnswered > 0) answered = true;
+                    isCorrect = correctItems === q.answers.length && itemsAnswered === q.answers.length;
+                }
+
+                if (!answered) allAnswered = false;
+
+                // Mostrar Feedback
+                feedbackElement.classList.remove('correct', 'incorrect');
+                feedbackElement.style.display = 'block';
+                
+                if (isCorrect && answered) {
+                    score++;
+                    feedbackElement.classList.add('correct');
+                    feedbackElement.innerHTML = `✅ **¡Correcto!** ${q.feedback}`;
+                } else {
+                    feedbackElement.classList.add('incorrect');
+                    let correctAnsText = '';
+                     if (q.type === 'sim_dragdrop' || q.type === 'sim_relational') {
+                         correctAnsText = 'Revisa las relaciones correctas en la retroalimentación.';
+                    } else if (q.type === 'checkbox') {
+                         correctAnsText = `Las respuestas correctas son: ${q.answer.join(', ')}.`;
+                    } else {
+                         correctAnsText = `La respuesta correcta es: ${q.answer}.`;
+                    }
+                    feedbackElement.innerHTML = `❌ **Incorrecto** o incompleto. ${q.feedback} (${correctAnsText})`;
+                }
+            });
+
+            scoreElement.innerHTML = `Tu puntaje final es: ${score} / ${totalQuestions}`;
+            if (!allAnswered) {
+                 scoreElement.innerHTML += "<br><span style='font-size: 0.8em; color: #dc3545;'>Nota: Asegúrate de responder todas las preguntas para una evaluación completa.</span>";
+            }
+            scoreElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
