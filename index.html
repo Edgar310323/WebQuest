@@ -155,7 +155,18 @@ HTML
 
         .video-wrapper h3 { margin-top: 0; color: var(--color-primary); }
         .video-wrapper p { margin-bottom: 15px; color: var(--color-text); }
-
+        
+		.boton-video {
+  	     	display: inline-block;
+    	  	 padding: 10px 20px;
+    		background-color: #007bff; /* Color azul */
+    		color: white !important;
+   	 		text-decoration: none;
+   	 		border-radius: 5px;
+    		font-weight: bold;
+   	 		box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    		transition: background-color 0.3s ease;
+       }
         .role-list {
             list-style: none;
             padding: 0;
@@ -340,16 +351,15 @@ HTML
             <h2>🌍 Introducción: El Desafío del Ingeniero Comunicador</h2>
             <p>La ingeniería moderna no se trata solo de cálculos y estructuras; es fundamentalmente un **acto de comunicación**. Los proyectos fallan no por mala ingeniería, sino por una pobre transmisión de ideas, la incapacidad de negociar, o la falta de claridad al interactuar con equipos multidisciplinarios, clientes y la sociedad.</p>
             
-            <div class="video-wrapper">
-                <h3>VIDEO: Comunicación Efectiva para Ingenieros</h3>
-                <p><strong>Habilidades interpersonales para el éxito profesional</strong><br>
-                <span style="font-size: 0.9em;">Presentado por: Andrea Peris Yegros</span></p>
-                
-                <video width="80%" height="auto" controls style="border-radius: 8px; box-shadow: var(--box-shadow-light);">
-                    <source src="Comunicación Efectiva para Ingenieros.Mp4" type="video/mp4">
-                    Tu navegador no soporta la etiqueta de video.
-                </video>
-            </div>
+             <div class="video-wrapper">
+   			 <h3>VIDEO: Comunicación Efectiva para Ingenieros</h3>
+   			 <p><strong>Habilidades interpersonales para el éxito profesional</strong><br>
+   		 	 <span style="font-size: 0.9em;">Presentado por: Andrea Peris Yegros</span></p>
+    
+    		 <a href="https://www.youtube.com/watch?v=ytB3M2ZLBck&t=1s" class="boton-video">
+       		 Ver el video: Comunicación Efectiva para Ingenieros
+    		</a>
+		</div>
 
             <p>Esta WebQuest te invita a explorar, desde la **Neuroeducación**, cómo nuestro cerebro procesa la información y cómo las **Habilidades Comunicacionales** (verbales, escritas y digitales) se convierten en el **engranaje crítico** que traduce el conocimiento técnico complejo en soluciones que impactan. Utilizarás las **TIC** como tus principales herramientas de investigación y presentación.</p>
             <p>**Tu misión:** Desarrollar una estrategia comunicacional robusta para un proyecto de ingeniería complejo, demostrando que la empatía y la claridad son tan cruciales como la precisión técnica. </p>
@@ -782,4 +792,5 @@ HTML
         }
     </script>
 </body>
+
 </html>
